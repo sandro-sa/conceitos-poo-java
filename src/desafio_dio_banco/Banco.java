@@ -21,6 +21,15 @@ public class Banco {
 	public void setContas(List<Conta> contas) {
 		this.contas = contas;
 	}
+
+
+	public void infBanco() {
+		System.out.println("Banco: "+ nome);
+		for (Conta conta : contas) {
+			System.out.println("Agencia: "+ conta.getAgencia());
+			System.out.println("Conta numero: "+ conta.getNumero());
+		}
+	}
 	
 	
 }

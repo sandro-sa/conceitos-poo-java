@@ -12,6 +12,9 @@ public abstract class Conta  implements IConta{
 	/*Composição*/
 	protected Cliente cliente;
 	
+	public Conta() {
+	}
+	
 	public Conta(Cliente cliente) {
 		
 		this.agencia = Conta.AGENCIA_PADRAO;
@@ -21,7 +24,11 @@ public abstract class Conta  implements IConta{
 	
 	@Override
 	public void sacar(double valor) {
-		this.saldo -= valor;
+		if(valor <= this.saldo) {
+			this.saldo -= valor;
+		}else {
+			System.out.println("== Saldo insuficiente! ==");
+		}
 	}
 	@Override
 	public void depositar(double valor) {
@@ -29,8 +36,13 @@ public abstract class Conta  implements IConta{
 	}
 	@Override
 	public void transferir(Conta contaDestino, double valor) {
-		this.sacar(valor);
-		contaDestino.depositar(valor);
+		if(valor <= this.saldo) {
+			this.sacar(valor);
+			contaDestino.depositar(valor);
+		}else {
+			System.out.println("== Transferencia negada, Saldo insuficiente! ==");
+		}
+		
 	}
 	
 	public int getAgencia() {
